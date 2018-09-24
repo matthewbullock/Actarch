@@ -5,7 +5,8 @@ import App from './App';
 import Callback from './callback';
 import Auth from './components/auth/Auth';
 import Navbar from './components/Nav';
-import Search from './components/Tables/Search';
+import MovieData from './components/DataPage/Movie';
+import Search from './components/Search/Search';
 import Profile from './components/Profile';
 import history from './history';
 
@@ -26,6 +27,7 @@ export const makeMainRoutes = () => {
           <Route exact path="/" render={(props) => <App auth={auth} {...props} />} />
           <Route path="/home" render={(props) => <App auth={auth} {...props} />} />
           <Route path="/search" render={(props) => <Search auth={auth} {...props} />} />
+          <Route path="/movie/:movie_id" render={(props) => <MovieData auth={auth} {...props} />} />
           <Route path="/profile" render={(props) => <Profile auth={auth} {...props} />} />
           <Route path="/callback" render={(props) => {
             handleAuthentication(props);

@@ -3,8 +3,8 @@ import {
   Input,
 } from 'semantic-ui-react'
 
-import GenericTable from './GenericTable/GenericTable'
-import ActorPage from './ActorPage'
+import GenericTable from './Tables/GenericTable/GenericTable'
+import ActorPage from '../DataPage/ActorPage'
 import axios from 'axios';
 
 class SearchBar extends Component {

@@ -7,7 +7,7 @@ import NavBar from './components/Nav'
 import Header from './components/Header'
 import NewReleases from './components/NewReleases'
 import Login from './components/auth/Login'
-import Search from './components/Tables/Search'
+import Search from './components/Search/Search'
 import { BrowserRouter , Route } from 'react-router-dom';
 import Auth from './components/auth/Auth';
 import history from './history';

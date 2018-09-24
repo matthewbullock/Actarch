@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Card, Icon, Image } from 'semantic-ui-react'
 import TextTruncate from 'react-text-truncate'
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
 
 class NewReleases extends Component {
 
@@ -20,7 +21,6 @@ class NewReleases extends Component {
   }
 
   componentDidMount(){
-    console.log("componenet did mount")
     let lastMonthDate = this.state.lastMonthDate
     let currentDate = this.state.currentDate
     axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=75827d106473f53ac8bf39883a5f17a2&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=2018&primary_release_date.gte=${lastMonthDate}&primary_release_date.lte=${currentDate}`)
@@ -34,7 +34,8 @@ class NewReleases extends Component {
     if(this.state.nowPlayingMovies.length !== 0){
         movies = this.state.nowPlayingMovies.map((movie , index) => {
           return(
-            <Card>
+            <Card key={movie.id}>
+              <Link to={'/movie/' + movie.id}>
               <Image src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
               <Card.Content>
                 <Card.Header>{movie.original_title}</Card.Header>
@@ -53,6 +54,7 @@ class NewReleases extends Component {
               <Card.Content extra>
                 <p>{movie.vote_average}/10</p>
               </Card.Content>
+              </Link >
             </Card>
           );
         });
