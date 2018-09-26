@@ -6,6 +6,7 @@ class Header extends Component {
         <div className="header">
           <h1>Actarch</h1>
           <h4>The actor and movie database.</h4>
+
         </div>
     )
   }

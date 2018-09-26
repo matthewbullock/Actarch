@@ -369,3 +369,7 @@ header {
   flex-basis: 20%;
   margin: 5px;
 }
+
+.ui.tiny.image {
+  margin-right: 15px;
+}

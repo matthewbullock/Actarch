@@ -4,7 +4,7 @@ import {
 } from 'semantic-ui-react'
 
 import GenericTable from './Tables/GenericTable/GenericTable'
-import ActorPage from '../DataPage/ActorPage'
+import ActorData from '../DataPage/ActorData'
 import axios from 'axios';
 
 class SearchBar extends Component {
@@ -85,7 +85,7 @@ class SearchBar extends Component {
     if(this.state.tableData.length !== 0){
       display = <GenericTable value={this.state.value} sendData={this.getData} tableData={this.state.tableData} toggleOn={this.toggleOn} toggleOff={this.toggleOff} />
     } else if(this.state.actorData.length !== 0){
-      display = <ActorPage value={this.state.value} sendData={this.getData} getActorsInfo={this.getActorsInfo} actorInfo={this.state.actorInfo} actorData={this.state.actorData} toggleOn={this.toggleOn} toggleOff={this.toggleOff} />
+      display = <ActorData value={this.state.value} sendData={this.getData} getActorsInfo={this.getActorsInfo} actorInfo={this.state.actorInfo} actorData={this.state.actorData} toggleOn={this.toggleOn} toggleOff={this.toggleOff} />
     }
 
     return (

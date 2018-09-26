@@ -12,8 +12,9 @@ class GenericTableBody extends Component {
 
     if(this.props.tableData.length !== 0){
         actors = this.props.tableData.results.map((actor , index) => {
+          console.log(actor)
           return(
-            <GenericTableRow key={index} actor={actor} toggleOn={this.props.toggleOn} toggleOff={this.props.toggleOff} sendData={this.props.sendData}/>
+            <GenericTableRow key={actor.id} actor={actor} toggleOn={this.props.toggleOn} toggleOff={this.props.toggleOff} sendData={this.props.sendData}/>
           );
         });
     }
