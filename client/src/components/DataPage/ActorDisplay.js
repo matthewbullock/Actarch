@@ -26,8 +26,10 @@ class ActorDisplay extends Component {
     let crew
     let actorDescription
     let birthday
-    let filterMovies
-    let filterTv
+    let filterMoviesCast
+    let filterTvCast
+    let filterMoviesCrew
+    let filterTvCrew
     const { activeIndex } = this.state
 
     if(this.props.actorInfo.length !== 0){
@@ -35,10 +37,11 @@ class ActorDisplay extends Component {
       actorDescription = actorInfo.biography
       combined_credits = actorInfo.combined_credits
       cast = combined_credits.cast
+      crew = combined_credits.crew
       if(actorInfo.birthday){
         birthday = "Born " + actorInfo.birthday.split("-").reverse().join("/") + " in " + this.props.actorInfo.place_of_birth
       }
-      filterMovies = cast
+      filterMoviesCast = cast
                       .filter(movie => movie.media_type === "movie")
                       .map((movie , index) => {
                             return(
@@ -53,8 +56,20 @@ class ActorDisplay extends Component {
                               </Item>
                             );
                       });
+      filterMoviesCrew = crew
+                      .filter(movie => movie.media_type === "movie")
+                      .map((movie , index) => {
+                            return(
+                              <Item key={movie.id}>
+                                <Item.Content>
+                                  <Item.Header as='a'><Link to={'/movie/' + movie.id}>{movie.title}</Link></Item.Header>
+                                  <Item.Meta>{movie.job}</Item.Meta>
+                                </Item.Content>
+                              </Item>
+                            );
+                      });
 
-      filterTv = cast
+      filterTvCast = cast
                 .filter(tv => tv.media_type === "tv")
                 .map((tv , index) => {
                   console.log(tv)
@@ -70,11 +85,51 @@ class ActorDisplay extends Component {
                         </Item>
                       );
                 });
+
+        filterTvCrew = crew
+                    .filter(tv => tv.media_type === "tv")
+                    .map((tv , index) => {
+                          return(
+                            <Item key={tv.id}>
+                              <Item.Content>
+                                <Item.Header as='a'><Link to={'/tv/' + tv.id}>{tv.name}</Link></Item.Header>
+                                <Item.Meta>{tv.job}</Item.Meta>
+                              </Item.Content>
+                            </Item>
+                          );
+                    });
     }
 
     if(actorDescription){
       actorDescription = actorDescription.replace(/\n\n/g , "</p><p>")
     }
+
+    const level1Panels = [
+      { key: 'panel-1a', title: 'Cast', content: filterMoviesCast },
+      { key: 'panel-ba', title: 'Crew', content: filterMoviesCrew },
+    ]
+
+    const Level1Content = (
+      <div>
+          <Accordion.Accordion panels={level1Panels} />
+      </div>
+    )
+
+    const level2Panels = [
+      { key: 'panel-2a', title: 'Cast', content: filterTvCast },
+      { key: 'panel-2b', title: 'Crew', content: filterTvCrew },
+    ]
+
+    const Level2Content = (
+      <div>
+        <Accordion.Accordion panels={level2Panels} />
+      </div>
+    )
+
+    const rootPanels = [
+      { key: 'panel-1', title: 'Movies', content: { content: Level1Content } },
+      { key: 'panel-2', title: 'TV', content: { content: Level2Content } },
+    ]
 
     return(
         <div>
@@ -96,26 +151,8 @@ class ActorDisplay extends Component {
                     </Item.Content>
                   </Item>
                 </Item.Group>
-                <Accordion fluid>
-                  <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
-                     <Icon name='dropdown' />
-                     Movies
-                   </Accordion.Title>
-                   <Accordion.Content active={activeIndex === 0}>
-                      <Item.Group divided>
-                        {filterMovies}
-                      </Item.Group>
-                   </Accordion.Content>
-                   <Accordion.Title active={activeIndex === 1} index={1} onClick={this.handleClick}>
-                    <Icon name='dropdown' />
-                    TV
-                  </Accordion.Title>
-                    <Accordion.Content active={activeIndex === 1}>
-                      <Item.Group divided>
-                        {filterTv}
-                      </Item.Group>
-                    </Accordion.Content>
-                </Accordion>
+                <Accordion defaultActiveIndex={0} panels={rootPanels} styled />
+
               </Segment>
         </div>
       )
@@ -123,3 +160,24 @@ class ActorDisplay extends Component {
 };
 
 export default ActorDisplay;
+
+// <Accordion fluid>
+//   <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
+//      <Icon name='dropdown' />
+//      Movies
+//    </Accordion.Title>
+//    <Accordion.Content active={activeIndex === 0}>
+//    <Item.Group divided>
+//      {filterMoviesCast}
+//    </Item.Group>
+//    </Accordion.Content>
+//    <Accordion.Title active={activeIndex === 1} index={1} onClick={this.handleClick}>
+//     <Icon name='dropdown' />
+//     TV
+//   </Accordion.Title>
+//     <Accordion.Content active={activeIndex === 1}>
+//       <Item.Group divided>
+//         {filterTvCast}
+//       </Item.Group>
+//     </Accordion.Content>
+// </Accordion>
