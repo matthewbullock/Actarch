@@ -1,5 +1,5 @@
 {
-  "name": "example-create-react-app-express",
+  "name": "artarch",
   "version": "1.0.0",
   "start": "node server.js",
   "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
