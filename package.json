@@ -2,7 +2,7 @@
   "name": "actearch",
   "version": "1.0.0",
   "engines": {
-      "node": "7.4.0"
+      "node": "^10.11.0"
    },
   "scripts": {
     "start": "node backend/app.js",
