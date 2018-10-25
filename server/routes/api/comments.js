@@ -7,11 +7,6 @@ module.exports = function(app) {
   app.get('/api/comments/:id', function(req, res) {
       //get ALL data from mongodb and pass it to view
       let requestId = req.params.id
-      // Comment.find({category_id: requestId}, function(err, docs) {
-      //     if (!err){
-      //         res.send(docs)
-      //     } else {throw err;}
-      // });
       Comment.find({category_id: requestId}, function(err, docs) {
           if (!err){
               res.send(docs)
