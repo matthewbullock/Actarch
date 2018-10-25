@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { Container, Header, Icon, Image , Item , Accordion , Segment , Label } from 'semantic-ui-react'
+import { Icon, Item , Accordion , Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser'
+
 
 class TVDisplay extends Component {
   constructor(props) {
@@ -28,7 +28,6 @@ class TVDisplay extends Component {
     let featuredStars
     let crew
     const { activeIndex } = this.state
-    console.log(tvInfo)
 
     if(this.props.tvInfo.length !== 0){
       firstDate = tvInfo.first_air_date.split("-")[0]

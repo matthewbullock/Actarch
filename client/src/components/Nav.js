@@ -1,24 +1,5 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import {
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  List,
-  Menu,
-  Responsive,
-  Segment,
-  Sidebar,
-  Visibility,
-} from 'semantic-ui-react';
-
-import history from '../history';
-import Auth from './auth/Auth.js';
-const auth = new Auth();
 
 class NavBar extends Component {
 
@@ -34,19 +15,19 @@ class NavBar extends Component {
   }
 
   goTo(route) {
-   this.props.history.replace(`/${route}`)
- }
+    this.props.history.replace(`/${route}`)
+  }
 
- login() {
-   this.props.auth.login();
- }
+  login() {
+    this.props.auth.login();
+  }
 
- logout() {
-   this.props.auth.logout();
- }
+  logout() {
+    this.props.auth.logout();
+  }
 
- render() {
-   const { isAuthenticated } = this.props.auth;
+  render() {
+    const { isAuthenticated } = this.props.auth;
 
     return (
       <header>

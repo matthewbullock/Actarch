@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 import TextTruncate from 'react-text-truncate'
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';

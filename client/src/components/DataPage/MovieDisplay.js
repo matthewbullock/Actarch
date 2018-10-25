@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { Container, Header, Icon, Image , Item } from 'semantic-ui-react'
+import React from 'react';
+import { Container, Item } from 'semantic-ui-react'
 
 const MovieDisplay = ({movieInfo}) => (
     <div>

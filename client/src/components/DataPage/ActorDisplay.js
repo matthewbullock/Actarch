@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { Container, Header, Icon, Image , Item , Accordion , Segment , Label } from 'semantic-ui-react'
+import { Item , Accordion , Segment , Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser'
+import ReactHtmlParser from 'react-html-parser'
+import { IntlMixin, FormattedDate , FormattedRelative } from 'react-intl';
 
 class ActorDisplay extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class ActorDisplay extends Component {
     let filterTvCast
     let filterMoviesCrew
     let filterTvCrew
-    const { activeIndex } = this.state
+    // const { activeIndex } = this.state
 
     if(this.props.actorInfo.length !== 0){
       actorInfo  = this.props.actorInfo
@@ -39,7 +40,8 @@ class ActorDisplay extends Component {
       cast = combined_credits.cast
       crew = combined_credits.crew
       if(actorInfo.birthday){
-        birthday = "Born " + actorInfo.birthday.split("-").reverse().join("/") + " in " + this.props.actorInfo.place_of_birth
+        // birthday = "Born " + actorInfo.birthday.split("-").reverse().join("/") + " in " + this.props.actorInfo.place_of_birth
+        birthday = actorInfo.birthday
       }
       filterMoviesCast = cast
                       .filter(movie => movie.media_type === "movie")
@@ -72,12 +74,11 @@ class ActorDisplay extends Component {
       filterTvCast = cast
                 .filter(tv => tv.media_type === "tv")
                 .map((tv , index) => {
-                  console.log(tv)
                       return(
                         <Item key={tv.id}>
                           <Item.Content>
                             <Item.Header as='a'><Link to={'/tv/' + tv.id}>{tv.name}</Link></Item.Header>
-                            <Item.Meta>{tv.character} - {tv.episode_count} {tv.episode_count == 1 ? "episode" : "episodes"}</Item.Meta>
+                            <Item.Meta>{tv.character} - {tv.episode_count} {tv.episode_count === 1 ? "episode" : "episodes"}</Item.Meta>
                             <Item.Description>
                               <p>{tv.overview}</p>
                             </Item.Description>
@@ -137,11 +138,14 @@ class ActorDisplay extends Component {
               <Item.Group divided>
                   <Item>
                     <Item.Image src={`https://image.tmdb.org/t/p/w500/${this.props.actorInfo.profile_path}`} />
-
                     <Item.Content>
                       <Item.Header as='a'>{this.props.actorInfo.name}</Item.Header>
                       <Item.Meta>
-                        <span className='cinema'>{birthday}</span>
+                      Born <FormattedDate
+                                   value={birthday}
+                                   day="numeric"
+                                   month="long"
+                                   year="numeric" /> in {this.props.actorInfo.place_of_birth}
                       </Item.Meta>
                       <Item.Description>{ReactHtmlParser(actorDescription)}</Item.Description>
                       <Item.Extra>
@@ -152,7 +156,6 @@ class ActorDisplay extends Component {
                   </Item>
                 </Item.Group>
                 <Accordion defaultActiveIndex={0} panels={rootPanels} styled />
-
               </Segment>
         </div>
       )
@@ -160,24 +163,3 @@ class ActorDisplay extends Component {
 };
 
 export default ActorDisplay;
-
-// <Accordion fluid>
-//   <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
-//      <Icon name='dropdown' />
-//      Movies
-//    </Accordion.Title>
-//    <Accordion.Content active={activeIndex === 0}>
-//    <Item.Group divided>
-//      {filterMoviesCast}
-//    </Item.Group>
-//    </Accordion.Content>
-//    <Accordion.Title active={activeIndex === 1} index={1} onClick={this.handleClick}>
-//     <Icon name='dropdown' />
-//     TV
-//   </Accordion.Title>
-//     <Accordion.Content active={activeIndex === 1}>
-//       <Item.Group divided>
-//         {filterTvCast}
-//       </Item.Group>
-//     </Accordion.Content>
-// </Accordion>

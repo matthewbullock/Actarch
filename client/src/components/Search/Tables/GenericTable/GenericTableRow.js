@@ -36,7 +36,7 @@ class GenericTableRow extends Component{
     let resultTitle = (resultType === "movie") ? this.props.actor.title : this.props.actor.name
     let resultImgPath =  (resultType === "person") ? this.props.actor.profile_path : this.props.actor.poster_path
     let resultOverview
-    let link
+
 
     if(this.props.actor.profile_path !== null || this.props.actor.poster_path !== null){
       img = <div className="imgContainer"><Image src={`https://image.tmdb.org/t/p/w500/${resultImgPath}`} rounded size='tiny' /></div>
