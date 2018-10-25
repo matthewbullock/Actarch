@@ -2,8 +2,8 @@
   "name": "actearch",
   "version": "1.0.0",
   "engines": {
-      "node": "^10.11.0"
-   },
+    "node": "^10.11.0"
+  },
   "scripts": {
     "start": "node backend/app.js",
     "build": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
@@ -15,9 +15,7 @@
   "dependencies": {
     "cors": "^2.8.4",
     "express": "^4.16.2",
-    "mongoose": "^5.3.4"
-  },
-  "devDependencies": {
+    "mongoose": "^5.3.4",
     "concurrently": "^3.5.0"
   }
 }
