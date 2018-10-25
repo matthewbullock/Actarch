@@ -5,15 +5,14 @@
     "node": "^10.11.0"
   },
   "scripts": {
-    "start": "node backend/app.js",
-    "build": "concurrently \"cd client && yarn start\" \"cd server && yarn start\"",
-    "heroku-postbuild": "yarn build",
-    "dev": "concurrently \"cd client && yarn start\" \"cd server && yarn start\""
+    "start": "node server/app.js",
+    "client": "cd client && yarn start",
+    "server": "nodemon server/app.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "dev": "concurrently --kill-others-on-fai \"yarn server\" \"yarn client\""
   },
   "dependencies": {
-    "cors": "^2.8.4",
     "express": "^4.16.2",
-    "mongoose": "^5.3.4",
     "concurrently": "^3.5.0"
   }
 }
