@@ -1,11 +1,15 @@
 import auth0 from 'auth0-js';
 import history from '../../history';
+import { isLocalhost } from '../../registerServiceWorker';
+const redirectUrl = isLocalhost ? "http://localhost:3000/callback" : "https://actearch.herokuapp.com/"
+
 
 export default class Auth {
+
   auth0 = new auth0.WebAuth({
     domain: 'react-movie.eu.auth0.com',
     clientID: 'd0FyLlqn84Nsd2hAPPONFyevi0TO10ld',
-    redirectUri: 'http://localhost:3000/callback',
+    redirectUri: `${redirectUrl}`,
     responseType: 'token id_token',
     scope: 'openid profile'
   });
