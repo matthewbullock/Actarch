@@ -15,7 +15,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    console.log(path.join(__dirname, '/client/build', 'index.html'))
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
 
 require('./routes')(app);
 // app.use('/', index);
@@ -48,15 +57,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
-  // Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    console.log(path.join(__dirname, '/client/build', 'index.html'))
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-  });
-}
+
 
 module.exports = app;
 
