@@ -21,13 +21,12 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
   // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
-    console.log(path.join(__dirname, '/client/build', 'index.html'))
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }
 
 require('./routes')(app);
-// app.use('/', index);
+
 
 app.use(function(req, res, next) {
     // Set permissive CORS header - this allows this server to be used only as

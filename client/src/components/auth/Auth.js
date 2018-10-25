@@ -5,7 +5,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'react-movie.eu.auth0.com',
     clientID: 'd0FyLlqn84Nsd2hAPPONFyevi0TO10ld',
-    redirectUri: 'http://localhost:3000/callback',
+    redirectUri: 'https://actearch.herokuapp.com/callback',
     responseType: 'token id_token',
     scope: 'openid profile'
   });
