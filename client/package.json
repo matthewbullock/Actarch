@@ -1,6 +1,7 @@
 {
   "name": "actarch",
   "version": "0.1.0",
+  "proxy": "http://localhost:5000/",
   "private": true,
   "dependencies": {
     "@okta/okta-react": "^1.1.4",
@@ -29,6 +30,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "proxy": "http://localhost:5000/"
+  }
 }
