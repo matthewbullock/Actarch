@@ -1,7 +1,7 @@
 import auth0 from 'auth0-js';
 import history from '../../history';
 import { isLocalhost } from '../../registerServiceWorker';
-const redirectUrl = isLocalhost ? "http://localhost:3000/callback" : "https://actearch.herokuapp.com/"
+const redirectUrl = isLocalhost ? "http://localhost:3000/callback" : "https://actearch.herokuapp.com/callback"
 
 
 export default class Auth {
@@ -20,6 +20,7 @@ export default class Auth {
    this.handleAuthentication = this.handleAuthentication.bind(this);
    this.isAuthenticated = this.isAuthenticated.bind(this);
    this.getProfile = this.getProfile.bind(this);
+   console.log(redirectUrl)
   }
 
   login() {
