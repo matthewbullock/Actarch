@@ -6,10 +6,9 @@
   },
   "scripts": {
     "start": "node backend/app.js",
-    "build": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "build": "concurrently \"cd client && yarn build\" \"cd server && yarn build\"",
     "heroku-postbuild": "yarn build",
-    "client": "cd client && yarn start",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently \"cd client && yarn build\" \"cd server && yarn build\""
   },
   "dependencies": {
     "cors": "^2.8.4",
