@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header'
 import NewReleases from './components/NewReleases'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+
+
 
 class App extends Component {
 
@@ -21,10 +25,10 @@ class App extends Component {
     // const { isAuthenticated } = this.props.auth;
 
     return (
-      <div className="App">
-        <Header />
-        <NewReleases />
-      </div>
+        <div className="App">
+          <Header />
+          <NewReleases />
+        </div>
     );
   }
 }

@@ -1,8 +1,12 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import CommentList from './CommentList'
 import CommentForm from './CommentForm'
+import { connect } from 'react-redux'
+import { fetchComments } from '../../actions/commentActions'
 const axios = require('axios');
+
 
 class Comments extends Component {
   constructor(props) {
@@ -16,6 +20,7 @@ class Comments extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchComments(this.state.id)
     const { userProfile, getProfile } = this.props.auth;
 
     if (!userProfile) {
@@ -26,24 +31,24 @@ class Comments extends Component {
       this.setState({ profile: userProfile });
     }
 
-    this.callApi()
-      .then(comments => {
-        this.setState({comments})
-      })
-      .catch(err => console.log(err));
+    // this.callApi()
+    //   .then(comments => {
+    //     this.setState({comments})
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   updateComments(newComments) {
     this.setState({comments: newComments})
   }
 
-  callApi = async () => {
-    const commentId = this.state.id
-    const response = await fetch(`/api/comments/${commentId}`);
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
+  // callApi = async () => {
+  //   const commentId = this.state.id
+  //   const response = await fetch(`/api/comments/${commentId}`);
+  //   const body = await response.json();
+  //   if (response.status !== 200) throw Error(body.message);
+  //   return body;
+  // };
 
   render() {
     return(
@@ -60,4 +65,12 @@ class Comments extends Component {
   }
 }
 
-export default Comments
+const mapStateToProps = state => ({
+  comments: state.comments.items
+})
+
+Comments.PropTypes = {
+  fetchComments: PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, {fetchComments})(Comments)
